@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PLClient"
+        
         mc:Ignorable="d"
         Title="MainWindow" Height="500" Width="800">
     
@@ -27,6 +28,7 @@
 
             <Button x:Name="Sign_Up"  Content="Sign Up" HorizontalAlignment="Left" Margin="359,341,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.415,-0.935" FontSize="14" FontFamily="Arial Rounded MT Bold" FontStyle="Normal" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" Click="Sign_Up_Click" />
 
+         
         </Grid>
         <Frame x:Name="Frame" Navigated="Frame_Navigated" NavigationUIVisibility="Hidden"  Visibility="{Binding ElementName=MainGrid,Path=Visibility, Converter={StaticResource HiddemTovisible}}"></Frame>
     </Grid>

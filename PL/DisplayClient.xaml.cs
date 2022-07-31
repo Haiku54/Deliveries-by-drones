@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GMap.NET;
+using GMap.NET.WindowsForms;
 using Model;
 
 namespace PL
@@ -60,7 +62,7 @@ namespace PL
         }
 
         /// <summary>
-        /// ctor for new client that sign up for the bonus
+        /// ctor for new client that sign up *for the bonus*
         /// </summary>
         /// <param name="s"></param>
         public DisplayClient(string s)
@@ -208,6 +210,28 @@ namespace PL
 
         }
 
-   
+        private void mapView_Loaded(object sender, RoutedEventArgs e)
+        {
+
+            GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerAndCache;
+            // choose your provider here
+            mapView.MapProvider = GMap.NET.MapProviders.OpenStreetMapProvider.Instance;
+            mapView.MinZoom = 2;
+            mapView.MaxZoom = 17;
+
+            // whole world zoom
+            mapView.Zoom = 12;
+            // lets the map use the mousewheel to zoom
+            mapView.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionAndCenter;
+            // lets the user drag the map
+            mapView.CanDragMap = true;
+            // lets the user drag the map with the left mouse button
+            mapView.DragButton = MouseButton.Left;
+            mapView.Position = new PointLatLng(31.761804840069285, 35.189091442003786);
+        }
+
+ 
+
+
     }
 }

@@ -7,6 +7,10 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Controls;
+using GMap.NET;
+using GMap.NET.WindowsForms;
+
+using GMap.NET.WindowsPresentation;
 
 namespace PL
 {
@@ -425,6 +429,28 @@ namespace PL
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
+        }
+    }
+
+    public class locationToPoint : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            
+            if (value != null)
+                return new PointLatLng(((BO.Location)value).Latitude, ((BO.Location)value).Longitude);
+            return new PointLatLng(31.761804840069285, 35.189091442003786);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            BO.Location p = new ();
+            if (value != null)
+            {
+                p.Latitude = ((PointLatLng)value).Lat;
+                p.Longitude = ((PointLatLng)value).Lng;
+            }
+            return p;
         }
     }
 }

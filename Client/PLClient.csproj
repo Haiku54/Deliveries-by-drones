@@ -17,6 +17,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="GMap.NET.Core">
+      <HintPath>..\..\..\..\.nuget\packages\gmap.net.core\2.0.3\lib\netstandard2.0\GMap.NET.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="GMap.NET.WindowsForms">
+      <HintPath>..\..\..\..\.nuget\packages\gmap.net.winforms\2.0.3\lib\net46\GMap.NET.WindowsForms.dll</HintPath>
+    </Reference>
+    <Reference Include="GMap.NET.WindowsPresentation">
+      <HintPath>..\..\..\..\.nuget\packages\gmap.net.winpresentation\2.0.3\lib\net46\GMap.NET.WindowsPresentation.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="iDDmages.JPG" />
     <Resource Include="iDDmKages.JPG" />
     <Resource Include="phCL.jpg" />
