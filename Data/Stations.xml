@@ -5,20 +5,20 @@
     <Name>Malcha Mall</Name>
     <Latitude>31.7515163</Latitude>
     <Longitude>35.1872451</Longitude>
-    <ChargeSlots>4</ChargeSlots>
+    <ChargeSlots>6</ChargeSlots>
   </Stations>
   <Stations>
     <ID>20</ID>
     <Name>Central Station</Name>
     <Latitude>31.7888727</Latitude>
     <Longitude>35.2031491</Longitude>
-    <ChargeSlots>3</ChargeSlots>
+    <ChargeSlots>8</ChargeSlots>
   </Stations>
   <Stations>
     <ID>30</ID>
     <Name>Mount Scopus</Name>
     <Latitude>31.7930604</Latitude>
     <Longitude>35.2449342</Longitude>
-    <ChargeSlots>4</ChargeSlots>
+    <ChargeSlots>2</ChargeSlots>
   </Stations>
 </Stations>
