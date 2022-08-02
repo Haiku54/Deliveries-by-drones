@@ -1,73 +1,73 @@
 <?xml version="1.0"?>
 <ArrayOfClient xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Client>
-    <ID>278562529</ID>
+    <ID>859547953</ID>
     <Name>Smith</Name>
-    <Phone>0586142895</Phone>
-    <Latitude>31.741374</Latitude>
-    <Longitude>35.16607</Longitude>
+    <Phone>0549282600</Phone>
+    <Latitude>31.755194</Latitude>
+    <Longitude>35.171242</Longitude>
   </Client>
   <Client>
-    <ID>585742431</ID>
+    <ID>315221211</ID>
     <Name>Johnson</Name>
-    <Phone>0522597604</Phone>
-    <Latitude>31.742494</Latitude>
-    <Longitude>35.255524</Longitude>
+    <Phone>0572923289</Phone>
+    <Latitude>31.771898</Latitude>
+    <Longitude>35.166241</Longitude>
   </Client>
   <Client>
-    <ID>530522785</ID>
+    <ID>668585634</ID>
     <Name>Williams</Name>
-    <Phone>0561874833</Phone>
-    <Latitude>31.814454</Latitude>
-    <Longitude>35.212719</Longitude>
+    <Phone>0552186334</Phone>
+    <Latitude>31.816774</Latitude>
+    <Longitude>35.257326</Longitude>
   </Client>
   <Client>
-    <ID>242105336</ID>
+    <ID>307523686</ID>
     <Name>Brown</Name>
-    <Phone>0553034589</Phone>
-    <Latitude>31.733203</Latitude>
-    <Longitude>35.225776</Longitude>
+    <Phone>0554834905</Phone>
+    <Latitude>31.741819</Latitude>
+    <Longitude>35.189084</Longitude>
   </Client>
   <Client>
-    <ID>434179941</ID>
+    <ID>309414245</ID>
     <Name>Lee</Name>
-    <Phone>0523776717</Phone>
-    <Latitude>31.755877</Latitude>
-    <Longitude>35.160008</Longitude>
+    <Phone>0552645813</Phone>
+    <Latitude>31.758392</Latitude>
+    <Longitude>35.204733</Longitude>
   </Client>
   <Client>
-    <ID>884246355</ID>
+    <ID>847469692</ID>
     <Name>Garcia</Name>
-    <Phone>0528489951</Phone>
-    <Latitude>31.766497</Latitude>
-    <Longitude>35.179173</Longitude>
+    <Phone>0579663582</Phone>
+    <Latitude>31.806639</Latitude>
+    <Longitude>35.250146</Longitude>
   </Client>
   <Client>
-    <ID>254567478</ID>
+    <ID>744964084</ID>
     <Name>Miller</Name>
-    <Phone>0549395882</Phone>
-    <Latitude>31.733776</Latitude>
-    <Longitude>35.163903</Longitude>
+    <Phone>0545260931</Phone>
+    <Latitude>31.751864</Latitude>
+    <Longitude>35.169951</Longitude>
   </Client>
   <Client>
-    <ID>394905083</ID>
+    <ID>988903956</ID>
     <Name>Davis</Name>
-    <Phone>0539793776</Phone>
-    <Latitude>31.815256</Latitude>
-    <Longitude>35.161802</Longitude>
+    <Phone>0534971563</Phone>
+    <Latitude>31.790071</Latitude>
+    <Longitude>35.21259</Longitude>
   </Client>
   <Client>
-    <ID>494587873</ID>
+    <ID>706612950</ID>
     <Name>Rodriguez</Name>
-    <Phone>0566809070</Phone>
-    <Latitude>31.769425</Latitude>
-    <Longitude>35.255495</Longitude>
+    <Phone>0585929453</Phone>
+    <Latitude>31.76736</Latitude>
+    <Longitude>35.204648</Longitude>
   </Client>
   <Client>
-    <ID>997871705</ID>
+    <ID>617281870</ID>
     <Name>Martinez</Name>
-    <Phone>0579234524</Phone>
-    <Latitude>31.800094</Latitude>
-    <Longitude>35.168908</Longitude>
+    <Phone>0579817181</Phone>
+    <Latitude>31.751087</Latitude>
+    <Longitude>35.250916</Longitude>
   </Client>
 </ArrayOfClient>

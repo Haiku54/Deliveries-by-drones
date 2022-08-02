@@ -5,14 +5,14 @@
     <Name>Malcha Mall</Name>
     <Latitude>31.7515163</Latitude>
     <Longitude>35.1872451</Longitude>
-    <ChargeSlots>5</ChargeSlots>
+    <ChargeSlots>4</ChargeSlots>
   </Stations>
   <Stations>
     <ID>20</ID>
     <Name>Central Station</Name>
     <Latitude>31.7888727</Latitude>
     <Longitude>35.2031491</Longitude>
-    <ChargeSlots>3</ChargeSlots>
+    <ChargeSlots>4</ChargeSlots>
   </Stations>
   <Stations>
     <ID>30</ID>
