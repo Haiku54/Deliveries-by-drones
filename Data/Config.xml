@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Config>
-  <PackageId>1010</PackageId>
+  <PackageId>1049</PackageId>
   <PowerAvailableDrone>1</PowerAvailableDrone>
   <PowerLightDrone>2</PowerLightDrone>
   <PowerMediumDrone>3</PowerMediumDrone>
