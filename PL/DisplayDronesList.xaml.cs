@@ -36,7 +36,7 @@ namespace PL
         {
             InitializeComponent();
             this.BL = BlApi.BlFactory.GetBL();
-            DronesListView.DataContext = global::Model.Model.drones;
+            DronesListView.DataContext = global::Model.ViewModel.drones;
            
             StatusSelector.ItemsSource = Enum.GetValues(typeof(BO.DroneStatus));
             WeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
@@ -75,12 +75,12 @@ namespace PL
         /// <param name="e"></param>
         private void Reset_Button_Click(object sender, RoutedEventArgs e)
         {
-            global::Model.Model.drones.Clear();
+            global::Model.ViewModel.drones.Clear();
             foreach (var item in BL.DisplayDroneList())
             {
                 PO.DroneToList d = (PO.DroneToList)item.CopyPropertiesToNew(typeof(PO.DroneToList));
                 d.DroneLocation = item.DroneLocation;
-                global::Model.Model.drones.Add(d);
+                global::Model.ViewModel.drones.Add(d);
             }
             Show_Drones(this, new RoutedEventArgs()); //after filter
 
@@ -99,20 +99,20 @@ namespace PL
                 if (Show_Normally.IsChecked == true)
                 {
                     var d = BL.DisplayDroneList();
-                    var temp = new ObservableCollection<PO.DroneToList>(global::Model.Model.drones);
-                    global::Model.Model.drones.Clear();
+                    var temp = new ObservableCollection<PO.DroneToList>(global::Model.ViewModel.drones);
+                    global::Model.ViewModel.drones.Clear();
                     foreach (var item in d)
                     {
                         PO.DroneToList d1 = (PO.DroneToList)item.CopyPropertiesToNew(typeof(PO.DroneToList));
                         d1.DroneLocation = item.DroneLocation;
-                        if (temp.Any(x => x.ID == item.ID)) global::Model.Model.drones.Add(d1);
+                        if (temp.Any(x => x.ID == item.ID)) global::Model.ViewModel.drones.Add(d1);
                     }
                 }
                 else if (Show_Status.IsChecked == true)
                 {
                     var d = BL.DroneGroupbyStatus();
-                    var temp = new ObservableCollection<PO.DroneToList>(global::Model.Model.drones);
-                    global::Model.Model.drones.Clear();
+                    var temp = new ObservableCollection<PO.DroneToList>(global::Model.ViewModel.drones);
+                    global::Model.ViewModel.drones.Clear();
                     foreach (var group in d)
                     {
                         foreach (BO.DroneToList item in group)
@@ -121,7 +121,7 @@ namespace PL
                             {
                                 PO.DroneToList d2 = (PO.DroneToList)item.CopyPropertiesToNew(typeof(PO.DroneToList));
                                 d2.DroneLocation = item.DroneLocation;
-                                global::Model.Model.drones.Add(d2);
+                                global::Model.ViewModel.drones.Add(d2);
                             }
                         }
                     }
@@ -139,7 +139,7 @@ namespace PL
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             BO.DroneStatus? status;
-            global::Model.Model.drones.Clear();
+            global::Model.ViewModel.drones.Clear();
 
             if (StatusSelector.SelectedItem == null) status = null;
             else status = (BO.DroneStatus)StatusSelector.SelectedItem;
@@ -149,19 +149,19 @@ namespace PL
                 switch (status)
                 {
                     case BO.DroneStatus.Available:
-                        foreach (var d in BL.DisplayDroneListFilter(d => d.Status == BO.DroneStatus.Available)) global::Model.Model.drones.Add((PO.DroneToList)d.CopyPropertiesToNew(typeof(PO.DroneToList)));
+                        foreach (var d in BL.DisplayDroneListFilter(d => d.Status == BO.DroneStatus.Available)) global::Model.ViewModel.drones.Add((PO.DroneToList)d.CopyPropertiesToNew(typeof(PO.DroneToList)));
                         break;
 
                     case BO.DroneStatus.Maintenance:
-                        foreach (var d in BL.DisplayDroneListFilter(d => d.Status == BO.DroneStatus.Maintenance)) global::Model.Model.drones.Add((PO.DroneToList)d.CopyPropertiesToNew(typeof(PO.DroneToList)));
+                        foreach (var d in BL.DisplayDroneListFilter(d => d.Status == BO.DroneStatus.Maintenance)) global::Model.ViewModel.drones.Add((PO.DroneToList)d.CopyPropertiesToNew(typeof(PO.DroneToList)));
                         break;
 
                     case BO.DroneStatus.Shipping:
-                        foreach (var d in BL.DisplayDroneListFilter(d => d.Status == BO.DroneStatus.Shipping)) global::Model.Model.drones.Add((PO.DroneToList)d.CopyPropertiesToNew(typeof(PO.DroneToList)));
+                        foreach (var d in BL.DisplayDroneListFilter(d => d.Status == BO.DroneStatus.Shipping)) global::Model.ViewModel.drones.Add((PO.DroneToList)d.CopyPropertiesToNew(typeof(PO.DroneToList)));
                         break;
 
                     case null:
-                        foreach(var item in BL.DisplayDroneList()) global::Model.Model.drones.Add((PO.DroneToList)item.CopyPropertiesToNew(typeof(PO.DroneToList)));
+                        foreach(var item in BL.DisplayDroneList()) global::Model.ViewModel.drones.Add((PO.DroneToList)item.CopyPropertiesToNew(typeof(PO.DroneToList)));
                         break;
                 }
             }
@@ -170,24 +170,24 @@ namespace PL
                 switch (status)
                 {
                     case BO.DroneStatus.Available:
-                        foreach (var d in BL.DisplayDroneListFilter(d => d.Status == BO.DroneStatus.Available && d.MaxWeight == (BO.WeightCategories)WeightSelector.SelectedItem)) global::Model.Model.drones.Add((PO.DroneToList)d.CopyPropertiesToNew(typeof(PO.DroneToList)));
+                        foreach (var d in BL.DisplayDroneListFilter(d => d.Status == BO.DroneStatus.Available && d.MaxWeight == (BO.WeightCategories)WeightSelector.SelectedItem)) global::Model.ViewModel.drones.Add((PO.DroneToList)d.CopyPropertiesToNew(typeof(PO.DroneToList)));
                         break;
 
                     case BO.DroneStatus.Maintenance:
-                        foreach (var d in BL.DisplayDroneListFilter(d => d.Status == BO.DroneStatus.Maintenance && d.MaxWeight == (BO.WeightCategories)WeightSelector.SelectedItem)) global::Model.Model.drones.Add((PO.DroneToList)d.CopyPropertiesToNew(typeof(PO.DroneToList)));
+                        foreach (var d in BL.DisplayDroneListFilter(d => d.Status == BO.DroneStatus.Maintenance && d.MaxWeight == (BO.WeightCategories)WeightSelector.SelectedItem)) global::Model.ViewModel.drones.Add((PO.DroneToList)d.CopyPropertiesToNew(typeof(PO.DroneToList)));
                         break;
 
                     case BO.DroneStatus.Shipping:
-                        foreach (var d in BL.DisplayDroneListFilter(d => d.Status == BO.DroneStatus.Shipping && d.MaxWeight == (BO.WeightCategories)WeightSelector.SelectedItem)) global::Model.Model.drones.Add((PO.DroneToList)d.CopyPropertiesToNew(typeof(PO.DroneToList)));
+                        foreach (var d in BL.DisplayDroneListFilter(d => d.Status == BO.DroneStatus.Shipping && d.MaxWeight == (BO.WeightCategories)WeightSelector.SelectedItem)) global::Model.ViewModel.drones.Add((PO.DroneToList)d.CopyPropertiesToNew(typeof(PO.DroneToList)));
                         break;
 
                     case null:
-                        foreach (var d in BL.DisplayDroneListFilter(d => d.MaxWeight == (BO.WeightCategories)WeightSelector.SelectedItem)) global::Model.Model.drones.Add((PO.DroneToList)d.CopyPropertiesToNew(typeof(PO.DroneToList)));
+                        foreach (var d in BL.DisplayDroneListFilter(d => d.MaxWeight == (BO.WeightCategories)WeightSelector.SelectedItem)) global::Model.ViewModel.drones.Add((PO.DroneToList)d.CopyPropertiesToNew(typeof(PO.DroneToList)));
                         break;
 
                 }
             }
-            global::Model.Model.AddDronesLocations();
+            global::Model.ViewModel.AddDronesLocations();
         }
 
         /// <summary>
@@ -198,7 +198,7 @@ namespace PL
         private void WeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             BO.WeightCategories? weight;
-            global::Model.Model.drones.Clear();
+            global::Model.ViewModel.drones.Clear();
 
             if (WeightSelector.SelectedItem == null) weight = null;
             else weight = (BO.WeightCategories)WeightSelector.SelectedItem;
@@ -208,18 +208,18 @@ namespace PL
                 switch (weight)
                 {
                     case BO.WeightCategories.Heavy:
-                        foreach (var d in BL.DisplayDroneListFilter(d => d.MaxWeight == BO.WeightCategories.Heavy)) global::Model.Model.drones.Add((PO.DroneToList)d.CopyPropertiesToNew(typeof(PO.DroneToList)));
+                        foreach (var d in BL.DisplayDroneListFilter(d => d.MaxWeight == BO.WeightCategories.Heavy)) global::Model.ViewModel.drones.Add((PO.DroneToList)d.CopyPropertiesToNew(typeof(PO.DroneToList)));
                         break;
 
                     case BO.WeightCategories.Light:
-                        foreach (var d in BL.DisplayDroneListFilter(d => d.MaxWeight == BO.WeightCategories.Light)) global::Model.Model.drones.Add((PO.DroneToList)d.CopyPropertiesToNew(typeof(PO.DroneToList)));
+                        foreach (var d in BL.DisplayDroneListFilter(d => d.MaxWeight == BO.WeightCategories.Light)) global::Model.ViewModel.drones.Add((PO.DroneToList)d.CopyPropertiesToNew(typeof(PO.DroneToList)));
                         break;
 
                     case BO.WeightCategories.Medium:
-                        foreach (var d in BL.DisplayDroneListFilter(d => d.MaxWeight == BO.WeightCategories.Medium)) global::Model.Model.drones.Add((PO.DroneToList)d.CopyPropertiesToNew(typeof(PO.DroneToList)));
+                        foreach (var d in BL.DisplayDroneListFilter(d => d.MaxWeight == BO.WeightCategories.Medium)) global::Model.ViewModel.drones.Add((PO.DroneToList)d.CopyPropertiesToNew(typeof(PO.DroneToList)));
                         break;
                     case null:
-                        foreach (var d in BL.DisplayDroneListFilter(d => d.MaxWeight == (BO.WeightCategories)WeightSelector.SelectedItem)) global::Model.Model.drones.Add((PO.DroneToList)d.CopyPropertiesToNew(typeof(PO.DroneToList)));
+                        foreach (var d in BL.DisplayDroneListFilter(d => d.MaxWeight == (BO.WeightCategories)WeightSelector.SelectedItem)) global::Model.ViewModel.drones.Add((PO.DroneToList)d.CopyPropertiesToNew(typeof(PO.DroneToList)));
                         break;
                 }
             }
@@ -229,24 +229,24 @@ namespace PL
                 {
                     case BO.WeightCategories.Heavy:
 
-                        foreach (var d in BL.DisplayDroneListFilter(d => d.MaxWeight == BO.WeightCategories.Heavy && d.Status == (BO.DroneStatus)StatusSelector.SelectedItem)) global::Model.Model.drones.Add((PO.DroneToList)d.CopyPropertiesToNew(typeof(PO.DroneToList)));
+                        foreach (var d in BL.DisplayDroneListFilter(d => d.MaxWeight == BO.WeightCategories.Heavy && d.Status == (BO.DroneStatus)StatusSelector.SelectedItem)) global::Model.ViewModel.drones.Add((PO.DroneToList)d.CopyPropertiesToNew(typeof(PO.DroneToList)));
                         break;
 
                     case BO.WeightCategories.Light:
-                        foreach (var d in BL.DisplayDroneListFilter(d => d.MaxWeight == BO.WeightCategories.Light && d.Status == (BO.DroneStatus)StatusSelector.SelectedItem)) global::Model.Model.drones.Add((PO.DroneToList)d.CopyPropertiesToNew(typeof(PO.DroneToList)));
+                        foreach (var d in BL.DisplayDroneListFilter(d => d.MaxWeight == BO.WeightCategories.Light && d.Status == (BO.DroneStatus)StatusSelector.SelectedItem)) global::Model.ViewModel.drones.Add((PO.DroneToList)d.CopyPropertiesToNew(typeof(PO.DroneToList)));
                         break;
 
                     case BO.WeightCategories.Medium:
-                        foreach (var d in BL.DisplayDroneListFilter(d => d.MaxWeight == BO.WeightCategories.Medium && d.Status == (BO.DroneStatus)StatusSelector.SelectedItem)) global::Model.Model.drones.Add((PO.DroneToList)d.CopyPropertiesToNew(typeof(PO.DroneToList)));
+                        foreach (var d in BL.DisplayDroneListFilter(d => d.MaxWeight == BO.WeightCategories.Medium && d.Status == (BO.DroneStatus)StatusSelector.SelectedItem)) global::Model.ViewModel.drones.Add((PO.DroneToList)d.CopyPropertiesToNew(typeof(PO.DroneToList)));
                         break;
 
                     case null:
-                        foreach (var d in BL.DisplayDroneListFilter(d => d.Status == (BO.DroneStatus)StatusSelector.SelectedItem)) global::Model.Model.drones.Add((PO.DroneToList)d.CopyPropertiesToNew(typeof(PO.DroneToList)));
+                        foreach (var d in BL.DisplayDroneListFilter(d => d.Status == (BO.DroneStatus)StatusSelector.SelectedItem)) global::Model.ViewModel.drones.Add((PO.DroneToList)d.CopyPropertiesToNew(typeof(PO.DroneToList)));
 
                         break;
                 }
             }
-            global::Model.Model.AddDronesLocations();
+            global::Model.ViewModel.AddDronesLocations();
         }
 
        

@@ -32,7 +32,7 @@ namespace PO
             set
             {
                 _Model = value;
-                if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs("Model"));
+                if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs("ViewModel"));
             }
         }
 

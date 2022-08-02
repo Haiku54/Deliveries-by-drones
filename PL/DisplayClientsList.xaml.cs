@@ -36,7 +36,7 @@ namespace PL
         {
             InitializeComponent();
             this.BL = BlApi.BlFactory.GetBL();
-            ClientListView.DataContext = Model.Model.clients;
+            ClientListView.DataContext = Model.ViewModel.clients;
         }
 
 

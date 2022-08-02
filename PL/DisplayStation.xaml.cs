@@ -35,13 +35,13 @@ namespace PL
         {
             InitializeComponent();
             bL = BlApi.BlFactory.GetBL();
-            Model.Model.Station = new Station();
-            Model.Model.Station.station = new BO.Station();
-            Model.Model.Station.station.StationLocation = new BO.Location();
+            Model.ViewModel.Station = new Station();
+            Model.ViewModel.Station.station = new BO.Station();
+            Model.ViewModel.Station.station.StationLocation = new BO.Location();
 
-            MainGrid.DataContext = Model.Model.Station;
+            MainGrid.DataContext = Model.ViewModel.Station;
 
-            Model.Model.Station.station.StationLocation = new BO.Location();
+            Model.ViewModel.Station.station.StationLocation = new BO.Location();
             Mode.IsChecked = true;   //for visibility of some buttons
 
         }
@@ -53,11 +53,11 @@ namespace PL
         public DisplayStation(int id)
         {
             bL = BlApi.BlFactory.GetBL();
-            Model.Model.Station.station = bL.DisplayStation(id);
+            Model.ViewModel.Station.station = bL.DisplayStation(id);
             InitializeComponent();
 
-            MainGrid.DataContext = Model.Model.Station;
-            ChargingDroneList.ItemsSource = Model.Model.Station.station.ChargingDronesList;
+            MainGrid.DataContext = Model.ViewModel.Station;
+            ChargingDroneList.ItemsSource = Model.ViewModel.Station.station.ChargingDronesList;
 
         }
 
@@ -70,10 +70,10 @@ namespace PL
         {
             try
             {
-                bL.UpdateStationName(Model.Model.Station.station.ID, NameInput.Text);
+                bL.UpdateStationName(Model.ViewModel.Station.station.ID, NameInput.Text);
                 MessageBox.Show($"Name have been changed to {NameInput.Text} !", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                Model.Model.Station.station = bL.DisplayStation(Model.Model.Station.station.ID); 
-                Model.Model.stations.First(s => s.ID == Model.Model.Station.station.ID).Name = NameInput.Text;
+                Model.ViewModel.Station.station = bL.DisplayStation(Model.ViewModel.Station.station.ID); 
+                Model.ViewModel.stations.First(s => s.ID == Model.ViewModel.Station.station.ID).Name = NameInput.Text;
             }
             catch (Exception ex)
             {
@@ -91,10 +91,10 @@ namespace PL
             try
             {
                 int result = Int32.Parse(Charge_slot_input.Text);
-                bL.UpdateStationNumCharge(Model.Model.Station.station.ID, result);
+                bL.UpdateStationNumCharge(Model.ViewModel.Station.station.ID, result);
                 MessageBox.Show($" Number of Charge slot have been updated !", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                Model.Model.Station.station = bL.DisplayStation(Model.Model.Station.station.ID);  //update the list
-                Model.Model.stations.First(s => s.ID == Model.Model.Station.station.ID).AvailableChargingSlots = result - Model.Model.stations.First(s => s.ID == Model.Model.Station.station.ID).BusyChargingSlots;
+                Model.ViewModel.Station.station = bL.DisplayStation(Model.ViewModel.Station.station.ID);  //update the list
+                Model.ViewModel.stations.First(s => s.ID == Model.ViewModel.Station.station.ID).AvailableChargingSlots = result - Model.ViewModel.stations.First(s => s.ID == Model.ViewModel.Station.station.ID).BusyChargingSlots;
             }
             catch (Exception ex)
             {
@@ -112,11 +112,11 @@ namespace PL
         {
             try
             {
-                bL.AddStation(Model.Model.Station.station);
+                bL.AddStation(Model.ViewModel.Station.station);
                 MessageBox.Show($"The station was successfully added", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.NavigationService.GoBack();
 
-                Model.Model.stations.Add(new PO.StationToList() { ID = Model.Model.Station.station.ID, Name = Model.Model.Station.station.Name, AvailableChargingSlots = Model.Model.Station.station.AvailableChargeSlots, BusyChargingSlots = 0 });
+                Model.ViewModel.stations.Add(new PO.StationToList() { ID = Model.ViewModel.Station.station.ID, Name = Model.ViewModel.Station.station.Name, AvailableChargingSlots = Model.ViewModel.Station.station.AvailableChargeSlots, BusyChargingSlots = 0 });
             }
             catch (Exception ex)
             {

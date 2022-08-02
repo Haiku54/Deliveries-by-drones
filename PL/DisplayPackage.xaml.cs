@@ -33,14 +33,14 @@ namespace PL
         {
             InitializeComponent();
             bL = BlApi.BlFactory.GetBL();
-            Model.Model.Package = new Package();
-            MainGrid.DataContext = Model.Model.Package;
+            Model.ViewModel.Package = new Package();
+            MainGrid.DataContext = Model.ViewModel.Package;
             Package_Priority.ItemsSource = Enum.GetValues(typeof(BO.Priorities));
             Package_Weight.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
             ClientsList.ItemsSource = bL.DisplayClientList();
             ClientsList2.ItemsSource = bL.DisplayClientList();
 
-            Model.Model.Package.package = new BO.Package();
+            Model.ViewModel.Package.package = new BO.Package();
 
         }
 
@@ -51,11 +51,11 @@ namespace PL
         public DisplayPackage(int id)
         {
             bL = BlApi.BlFactory.GetBL();
-            Model.Model.Package.package = bL.DisplayPackage(id);
+            Model.ViewModel.Package.package = bL.DisplayPackage(id);
             InitializeComponent();
 
-            if (Model.Model.Package.package.Associated == null) Model.Model.Package.package.DroneOfPackage = new BO.DroneOfPackage();
-            MainGrid.DataContext = Model.Model.Package;
+            if (Model.ViewModel.Package.package.Associated == null) Model.ViewModel.Package.package.DroneOfPackage = new BO.DroneOfPackage();
+            MainGrid.DataContext = Model.ViewModel.Package;
             Package_Priority.ItemsSource = Enum.GetValues(typeof(BO.Priorities));
             Package_Weight.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
         }
@@ -70,10 +70,10 @@ namespace PL
         {
             try
             {
-                bL.DeletePackage(Model.Model.Package.package.ID);
+                bL.DeletePackage(Model.ViewModel.Package.package.ID);
                 //if (Back != null) Back(-1);
                 MessageBox.Show($"The package has been deleted !", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                Model.Model.packages.Remove(Model.Model.packages.First(p => p.Id == Model.Model.Package.package.ID));
+                Model.ViewModel.packages.Remove(Model.ViewModel.packages.First(p => p.Id == Model.ViewModel.Package.package.ID));
                 this.NavigationService.GoBack();
             }
             catch (Exception ex)
@@ -91,11 +91,11 @@ namespace PL
         {
             try
             {
-                int i = bL.AddPackage(Model.Model.Package.package);
+                int i = bL.AddPackage(Model.ViewModel.Package.package);
                 //if (Back != null) Back(-1);
                 MessageBox.Show($"The package was successfully added", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 BO.PackageToList packageToList = bL.GetPackageToList(i);
-                Model.Model.packages.Add((PO.PackageToList)packageToList.CopyPropertiesToNew(typeof(PO.PackageToList)));
+                Model.ViewModel.packages.Add((PO.PackageToList)packageToList.CopyPropertiesToNew(typeof(PO.PackageToList)));
                 this.NavigationService.GoBack();
             }
             catch (Exception ex)
@@ -124,11 +124,11 @@ namespace PL
         {
             try
             {
-                bL.PickedUpByDrone(Model.Model.Package.package.DroneOfPackage.Id);
+                bL.PickedUpByDrone(Model.ViewModel.Package.package.DroneOfPackage.Id);
                 MessageBox.Show($"The package has been collected !", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                Model.Model.Package.package = bL.DisplayPackage(Model.Model.Package.package.ID);
+                Model.ViewModel.Package.package = bL.DisplayPackage(Model.ViewModel.Package.package.ID);
 
-                Model.Model.packages.First(p => p.Id == Model.Model.Package.package.ID).Status = BO.PackageStatus.PickedUp;
+                Model.ViewModel.packages.First(p => p.Id == Model.ViewModel.Package.package.ID).Status = BO.PackageStatus.PickedUp;
             }
             catch (Exception ex)
             {
@@ -146,11 +146,11 @@ namespace PL
         {
             try
             {
-                bL.DeliveredToClient(Model.Model.Package.package.DroneOfPackage.Id);
+                bL.DeliveredToClient(Model.ViewModel.Package.package.DroneOfPackage.Id);
                 MessageBox.Show($"The package was delivered to the Client !", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                Model.Model.Package.package = bL.DisplayPackage(Model.Model.Package.package.ID);
+                Model.ViewModel.Package.package = bL.DisplayPackage(Model.ViewModel.Package.package.ID);
 
-                Model.Model.packages.First(p => p.Id == Model.Model.Package.package.ID).Status = BO.PackageStatus.Delivered;
+                Model.ViewModel.packages.First(p => p.Id == Model.ViewModel.Package.package.ID).Status = BO.PackageStatus.Delivered;
             }
             catch (Exception ex)
             {

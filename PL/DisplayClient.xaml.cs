@@ -38,12 +38,12 @@ namespace PL
         public DisplayClient()
         {
             InitializeComponent();
-            MainGrid.DataContext = Model.Model.Client;
+            MainGrid.DataContext = Model.ViewModel.Client;
             bL = BlApi.BlFactory.GetBL();
 
             Mode.IsChecked = true; // for visibility
-            Model.Model.Client.client = new BO.Client(); //init objects
-            Model.Model.Client.client.ClientLocation = new BO.Location();
+            Model.ViewModel.Client.client = new BO.Client(); //init objects
+            Model.ViewModel.Client.client.ClientLocation = new BO.Location();
         }
 
         /// <summary>
@@ -53,12 +53,12 @@ namespace PL
         public DisplayClient(int id)
         {
             bL = BlApi.BlFactory.GetBL();
-            Model.Model.Client.client = bL.DisplayClient(id);
+            Model.ViewModel.Client.client = bL.DisplayClient(id);
             InitializeComponent();
-            MainGrid.DataContext = Model.Model.Client;
+            MainGrid.DataContext = Model.ViewModel.Client;
 
-            SenderPackageList.ItemsSource = Model.Model.Client.client.ClientsSender;
-            ReceiverPackageList.ItemsSource = Model.Model.Client.client.ClientsReceiver;
+            SenderPackageList.ItemsSource = Model.ViewModel.Client.client.ClientsSender;
+            ReceiverPackageList.ItemsSource = Model.ViewModel.Client.client.ClientsReceiver;
         }
 
         /// <summary>
@@ -69,8 +69,8 @@ namespace PL
         {
             InitializeComponent();
             bL = BlApi.BlFactory.GetBL();
-            Model.Model.Client = new Client();
-            DataContext = Model.Model.Client;
+            Model.ViewModel.Client = new Client();
+            DataContext = Model.ViewModel.Client;
             Sign_up.Visibility = Visibility.Visible;
             Cancel_Sign_up.Visibility = Visibility.Visible;
             Add_Client_Button.Visibility = Visibility.Hidden;
@@ -78,8 +78,8 @@ namespace PL
             Mode.IsChecked = true;
             
             
-            Model.Model.Client.client = new BO.Client();
-            Model.Model.Client.client.ClientLocation = new BO.Location();
+            Model.ViewModel.Client.client = new BO.Client();
+            Model.ViewModel.Client.client.ClientLocation = new BO.Location();
 
         }
 
@@ -93,12 +93,12 @@ namespace PL
         {
             try
             {
-                bL.UpdateClient(Model.Model.Client.client.ID, Client_Name.Text, "");
+                bL.UpdateClient(Model.ViewModel.Client.client.ID, Client_Name.Text, "");
 
                 MessageBox.Show("Client Name have been Changed Successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                Model.Model.Client.client = bL.DisplayClient(Model.Model.Client.client.ID);
+                Model.ViewModel.Client.client = bL.DisplayClient(Model.ViewModel.Client.client.ID);
 
-                Model.Model.clients.First(c => c.Id == Model.Model.Client.client.ID).Name = Model.Model.Client.client.Name;
+                Model.ViewModel.clients.First(c => c.Id == Model.ViewModel.Client.client.ID).Name = Model.ViewModel.Client.client.Name;
             }
             catch (Exception ex)
             {
@@ -116,11 +116,11 @@ namespace PL
         {
             try
             {
-                bL.UpdateClient(Model.Model.Client.client.ID, "", Client_Phone.Text);
+                bL.UpdateClient(Model.ViewModel.Client.client.ID, "", Client_Phone.Text);
                 MessageBox.Show("Client Phone have been Changed Successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                Model.Model.Client.client = bL.DisplayClient(Model.Model.Client.client.ID);
+                Model.ViewModel.Client.client = bL.DisplayClient(Model.ViewModel.Client.client.ID);
 
-                Model.Model.clients.First(c => c.Id == Model.Model.Client.client.ID).Phone = Model.Model.Client.client.Phone;
+                Model.ViewModel.clients.First(c => c.Id == Model.ViewModel.Client.client.ID).Phone = Model.ViewModel.Client.client.Phone;
             }
             catch (Exception ex)
             {
@@ -171,11 +171,11 @@ namespace PL
         {
             try
             {
-                bL.AddClient(Model.Model.Client.client);
+                bL.AddClient(Model.ViewModel.Client.client);
                 MessageBox.Show($"The Client was successfully added", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 if (MainWindow != null) MainWindow(this, new RoutedEventArgs());
 
-                Model.Model.clients.Add((PO.ClientToList)bL.GetClientToList(Model.Model.Client.client.ID).CopyPropertiesToNew(typeof(PO.ClientToList)));
+                Model.ViewModel.clients.Add((PO.ClientToList)bL.GetClientToList(Model.ViewModel.Client.client.ID).CopyPropertiesToNew(typeof(PO.ClientToList)));
                 if (this.NavigationService != null && this.NavigationService.CanGoBack) this.NavigationService.GoBack();
             }
             catch (Exception ex)

@@ -1,52 +1,52 @@
 <?xml version="1.0"?>
 <ArrayOfDrone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Drone>
-    <ID>8759513</ID>
+    <ID>7679231</ID>
     <Model>Dji_Mavic_2_Pro</Model>
     <MaxWeight>Heavy</MaxWeight>
   </Drone>
   <Drone>
-    <ID>8363594</ID>
+    <ID>1821159</ID>
     <Model>Dji_Mavic_2_Pro</Model>
     <MaxWeight>Heavy</MaxWeight>
   </Drone>
   <Drone>
-    <ID>2494320</ID>
+    <ID>6475513</ID>
     <Model>Dji_Mavic_2_Pro</Model>
     <MaxWeight>Heavy</MaxWeight>
   </Drone>
   <Drone>
-    <ID>6739783</ID>
+    <ID>9646549</ID>
     <Model>Dji_Mavic_2_Pro</Model>
     <MaxWeight>Heavy</MaxWeight>
   </Drone>
   <Drone>
-    <ID>4743521</ID>
+    <ID>6503806</ID>
     <Model>Dji_Mavic_2_Air</Model>
     <MaxWeight>Medium</MaxWeight>
   </Drone>
   <Drone>
-    <ID>8973781</ID>
+    <ID>1559829</ID>
     <Model>Dji_Mavic_2_Air</Model>
     <MaxWeight>Medium</MaxWeight>
   </Drone>
   <Drone>
-    <ID>6535742</ID>
+    <ID>4253807</ID>
     <Model>Dji_Mavic_2_Air</Model>
     <MaxWeight>Medium</MaxWeight>
   </Drone>
   <Drone>
-    <ID>3925312</ID>
+    <ID>7616047</ID>
     <Model>Dji_Mavic_2_Zoom</Model>
     <MaxWeight>Light</MaxWeight>
   </Drone>
   <Drone>
-    <ID>4656122</ID>
+    <ID>6787241</ID>
     <Model>Dji_Mavic_2_Zoom</Model>
     <MaxWeight>Light</MaxWeight>
   </Drone>
   <Drone>
-    <ID>9555489</ID>
+    <ID>6889762</ID>
     <Model>Dji_Mavic_2_Zoom</Model>
     <MaxWeight>Light</MaxWeight>
   </Drone>

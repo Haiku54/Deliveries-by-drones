@@ -46,7 +46,7 @@ namespace xml
                                                     new XElement("PowerLightDrone", 2),
                                                     new XElement("PowerMediumDrone", 3),
                                                     new XElement("PowerHeavyDrone", 4),
-                                                    new XElement("ChargeRate", 15)
+                                                    new XElement("ChargeRate", 5)
                                                 );
 
             rootElemStations.Save(dirPath + configPath);

@@ -28,7 +28,7 @@ namespace PL
             InitializeComponent();
             BL = BlApi.BlFactory.GetBL();
             content = this.Content;
-            new Model.Model();
+            new Model.ViewModel();
         }
 
 
@@ -172,14 +172,14 @@ namespace PL
         /// <param name="id"></param>
         private void DroneDisplayPage(int id) 
         {
-            if (Model.Model.drones.First(d => d.ID == id).DronePage == null) // If this drone has been opened before, then the old page will open, this is so that it will be possible to stop the background Worker
+            if (Model.ViewModel.drones.First(d => d.ID == id).DronePage == null) // If this drone has been opened before, then the old page will open, this is so that it will be possible to stop the background Worker
             {
                 var droneDisplayPage = new DisplayDrone(id);
                 droneDisplayPage.PackagePage += PackageDisplayFromDrone; // Registration for the event Opening a package page from a drone page
                 this.Frame.Content = droneDisplayPage;
-                Model.Model.drones.First(d => d.ID == id).DronePage = droneDisplayPage;
+                Model.ViewModel.drones.First(d => d.ID == id).DronePage = droneDisplayPage;
             }
-            else this.Frame.Content = Model.Model.drones.First(d => d.ID == id).DronePage;
+            else this.Frame.Content = Model.ViewModel.drones.First(d => d.ID == id).DronePage;
         }
 
         /// <summary>
@@ -224,14 +224,14 @@ namespace PL
         /// <param name="id"></param>
         private void DroneDisplayPageFromPackage(int id)
         {
-            if (Model.Model.drones.First(d => d.ID == id).DronePage == null) // If this drone has been opened before, then the old page will open, this is so that it will be possible to stop the background Worker
+            if (Model.ViewModel.drones.First(d => d.ID == id).DronePage == null) // If this drone has been opened before, then the old page will open, this is so that it will be possible to stop the background Worker
             {
                 var page = new DisplayDrone(id);
                 page.PackagePage += PackageDisplayFromDrone; // Registration for the event Opening a package page from a drone page
                 this.Frame.Content = page;
-                Model.Model.drones.First(d => d.ID == id).DronePage = page;
+                Model.ViewModel.drones.First(d => d.ID == id).DronePage = page;
             }
-            else this.Frame.Content = Model.Model.drones.First(d => d.ID == id).DronePage;
+            else this.Frame.Content = Model.ViewModel.drones.First(d => d.ID == id).DronePage;
         }
 
         /// <summary>
@@ -240,13 +240,13 @@ namespace PL
         /// <param name="id"></param>
         private void DroneDiplayFromStation(int id)
         {
-            if (Model.Model.drones.First(d => d.ID == id).DronePage == null) // If this drone has been opened before, then the old page will open, this is so that it will be possible to stop the background Worker
+            if (Model.ViewModel.drones.First(d => d.ID == id).DronePage == null) // If this drone has been opened before, then the old page will open, this is so that it will be possible to stop the background Worker
             {
                 var droneDisplayPage = new DisplayDrone(id);
                 this.Frame.Content = droneDisplayPage;
-                Model.Model.drones.First(d => d.ID == id).DronePage = droneDisplayPage;
+                Model.ViewModel.drones.First(d => d.ID == id).DronePage = droneDisplayPage;
             }
-            else this.Frame.Content = Model.Model.drones.First(d => d.ID == id).DronePage;
+            else this.Frame.Content = Model.ViewModel.drones.First(d => d.ID == id).DronePage;
         }
 
         /// <summary>

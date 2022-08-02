@@ -36,7 +36,7 @@ namespace PL
         {
             InitializeComponent();
             this.BL = BlApi.BlFactory.GetBL();
-            PackageListView.DataContext = Model.Model.packages;
+            PackageListView.DataContext = Model.ViewModel.packages;
 
             PrioritySelector.ItemsSource = Enum.GetValues(typeof(BO.Priorities));
             StatusSelector.ItemsSource = Enum.GetValues(typeof(BO.PackageStatus));
@@ -73,10 +73,10 @@ namespace PL
         /// <param name="e"></param>
         private void Reset_Button_Click(object sender, RoutedEventArgs e)
         {
-            Model.Model.packages.Clear();
+            Model.ViewModel.packages.Clear();
             foreach (var item in BL.DisplayPackageList())
             {
-                Model.Model.packages.Add((PO.PackageToList)item.CopyPropertiesToNew(typeof(PO.PackageToList)));
+                Model.ViewModel.packages.Add((PO.PackageToList)item.CopyPropertiesToNew(typeof(PO.PackageToList)));
             }
             Show_Packages(this, new RoutedEventArgs()); // אחרי סינון
            
@@ -94,33 +94,33 @@ namespace PL
                 if(Show_Normally.IsChecked == true) //Normal show
                 {
                     var p = BL.DisplayPackageList();
-                    var temp = new ObservableCollection<PO.PackageToList>(Model.Model.packages);
-                    Model.Model.packages.Clear();
+                    var temp = new ObservableCollection<PO.PackageToList>(Model.ViewModel.packages);
+                    Model.ViewModel.packages.Clear();
                     foreach (var item in p)
                     {
-                        if(temp.Any(p=> p.Id==item.Id)) Model.Model.packages.Add((PO.PackageToList)item.CopyPropertiesToNew(typeof(PO.PackageToList)));
+                        if(temp.Any(p=> p.Id==item.Id)) Model.ViewModel.packages.Add((PO.PackageToList)item.CopyPropertiesToNew(typeof(PO.PackageToList)));
                     }
                 }
                 else if(Show_Receiver.IsChecked == true) // View by customer receives
                 {
                     var p = BL.PackagesGroupingReceiver();
-                    var temp = new ObservableCollection<PO.PackageToList>(Model.Model.packages);
-                    Model.Model.packages.Clear();
+                    var temp = new ObservableCollection<PO.PackageToList>(Model.ViewModel.packages);
+                    Model.ViewModel.packages.Clear();
                     foreach (var group in p)
                     {
                         foreach (BO.PackageToList item in group)
-                        { if (temp.Any(p => p.Id == item.Id)) Model.Model.packages.Add((PO.PackageToList)item.CopyPropertiesToNew(typeof(PO.PackageToList))); }
+                        { if (temp.Any(p => p.Id == item.Id)) Model.ViewModel.packages.Add((PO.PackageToList)item.CopyPropertiesToNew(typeof(PO.PackageToList))); }
                     }
                 }
                 else // Show by customer sending
                 {
                     var p = BL.PackagesGroupingSender(); 
-                    var temp = new ObservableCollection<PO.PackageToList>(Model.Model.packages);
-                    Model.Model.packages.Clear();
+                    var temp = new ObservableCollection<PO.PackageToList>(Model.ViewModel.packages);
+                    Model.ViewModel.packages.Clear();
                     foreach (var group in p)
                     {
                         foreach (BO.PackageToList item in group)
-                        { if (temp.Any(p => p.Id == item.Id)) Model.Model.packages.Add((PO.PackageToList)item.CopyPropertiesToNew(typeof(PO.PackageToList))); }
+                        { if (temp.Any(p => p.Id == item.Id)) Model.ViewModel.packages.Add((PO.PackageToList)item.CopyPropertiesToNew(typeof(PO.PackageToList))); }
                     }
                 }
             }
@@ -146,8 +146,8 @@ namespace PL
             else if (PrioritySelector.SelectedItem != null && WeightSelector.SelectedItem == null && StatusSelector.SelectedItem == null) filtered = BL.DisplayPackageList().Where(p => p.Priority == (BO.Priorities)PrioritySelector.SelectedItem).ToList();
 
             else filtered = BL.DisplayPackageList().Where(p => p.Status == (BO.PackageStatus)StatusSelector.SelectedItem && p.Priority == (BO.Priorities)WeightSelector.SelectedItem && p.Weight == (BO.WeightCategories)WeightSelector.SelectedItem).ToList();
-            Model.Model.packages.Clear();
-            if (filtered != null) foreach (var package in filtered) { Model.Model.packages.Add((PO.PackageToList)package.CopyPropertiesToNew(typeof(PO.PackageToList))); }
+            Model.ViewModel.packages.Clear();
+            if (filtered != null) foreach (var package in filtered) { Model.ViewModel.packages.Add((PO.PackageToList)package.CopyPropertiesToNew(typeof(PO.PackageToList))); }
             Show_Packages(this, new RoutedEventArgs()); // After filtering the display should be maintained
 
         }
@@ -165,11 +165,11 @@ namespace PL
                 var listFilterdByDate = BL.GetPackageFilterByDate((DateTime)StartDate.SelectedDate, (DateTime)EndDate.SelectedDate);
                 List<BO.PackageToList> temp = new List<BO.PackageToList>();
 
-                if (Model.Model.packages != null)
+                if (Model.ViewModel.packages != null)
                 {
                     foreach (var BlPackage in listFilterdByDate)
                     {
-                        if (Model.Model.packages.Any(p => p.Id == BlPackage.Id))
+                        if (Model.ViewModel.packages.Any(p => p.Id == BlPackage.Id))
                         {
                             BO.PackageToList packageToList = new BO.PackageToList();
                             BlPackage.CopyPropertiesTo(packageToList);
@@ -178,10 +178,10 @@ namespace PL
                     }
                 }
 
-                Model.Model.packages.Clear();
+                Model.ViewModel.packages.Clear();
                 foreach (var tempPackage in temp)
                 {
-                    Model.Model.packages.Add((PO.PackageToList)tempPackage.CopyPropertiesToNew(typeof(PO.PackageToList))); // // If after the filter without the date it exists in the list of the filter and also in the list of the date then we will insert it
+                    Model.ViewModel.packages.Add((PO.PackageToList)tempPackage.CopyPropertiesToNew(typeof(PO.PackageToList))); // // If after the filter without the date it exists in the list of the filter and also in the list of the date then we will insert it
                 }
 
                 Show_Packages(this, new RoutedEventArgs()); //  After filtering the display should be maintained
