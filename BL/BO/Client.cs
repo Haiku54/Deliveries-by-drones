@@ -14,8 +14,11 @@ namespace BO
         public string Name { get; set; }
         public string Phone { get; set; }
         public Location ClientLocation { get; set; }
-        public List<PackageAtClient> ClientsSender = new List<PackageAtClient>();
-        public List<PackageAtClient> ClientsReceiver = new List<PackageAtClient>();
+        public List<PackageAtClient> ClientsSender { get; set; }
+        //public List<PackageAtClient> ClientsSender = new List<PackageAtClient>();
+
+        public List<PackageAtClient> ClientsReceiver { get; set; }
+        //public List<PackageAtClient> ClientsReceiver = new List<PackageAtClient>();
 
         public override string ToString()
         {

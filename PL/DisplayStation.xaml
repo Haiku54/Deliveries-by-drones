@@ -153,7 +153,7 @@
                 </Button>
 
                 <TextBlock x:Name="ChargingDrone_Labl" Visibility="{Binding station.ChargingDronesList, Converter={StaticResource NullToHidden}, Mode=OneWay}" HorizontalAlignment="Left"  Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" Height="42" FontSize="14" FontWeight="Bold" Margin="27,7,0,0" Grid.RowSpan="2" Grid.Column="2"><Run Text="Charging drone"/><Run Language="fr-fr" Text="s"/><Run Text=":"/></TextBlock>
-                <ListBox  x:Name ="ChargingDroneList" Grid.Column="2" Grid.Row="4" Visibility="{Binding station.ChargingDronesList, Mode=OneWay, Converter={StaticResource NullToHidden}}"  ItemsSource="{Binding}"   Margin="24,10,-54,10" Grid.RowSpan="9" MouseDoubleClick="ChargingDroneList_DoubleClick"  />
+                <ListBox  x:Name ="ChargingDroneList" Grid.Column="2" Grid.Row="4" Visibility="{Binding  Mode=OneWay, Converter={StaticResource NullToHidden}}"  ItemsSource="{Binding Path=station.ChargingDronesList}"   Margin="24,10,-54,10" Grid.RowSpan="9" MouseDoubleClick="ChargingDroneList_DoubleClick"  />
 
             </Grid>
 

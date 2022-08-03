@@ -111,6 +111,7 @@ namespace Model
             int id = 0;
             updates update = (updates)e.ProgressPercentage;
             if (e.UserState != null) id = (int)e.UserState;
+            BO.Package package;
 
             switch (update)
             {
@@ -134,6 +135,12 @@ namespace Model
                 case updates.Associate:
                     if (ViewModel.Package.package != null && ViewModel.Package.package.ID == id)
                         ViewModel.Package.package = bl.DisplayPackage(id);
+
+                    package = bl.DisplayPackage(id);
+                    if (ViewModel.Client.client != null && ViewModel.Client.client.ID == package.SenderClient.ID)
+                        ViewModel.Client.client = bl.DisplayClient(package.SenderClient.ID);
+                    else if (ViewModel.Client.client != null && ViewModel.Client.client.ID == package.TargetClient.ID)
+                        ViewModel.Client.client = bl.DisplayClient(package.TargetClient.ID);
                     updatePackagesList();
                     updateClientsList();
                     break;
@@ -141,6 +148,13 @@ namespace Model
                 case updates.PickedUp:
                     if (ViewModel.Package.package != null && ViewModel.Package.package.ID == id)
                        ViewModel.Package.package = bl.DisplayPackage(id);
+
+                    package = bl.DisplayPackage(id);
+                    if (ViewModel.Client.client != null && ViewModel.Client.client.ID == package.SenderClient.ID)
+                        ViewModel.Client.client = bl.DisplayClient(package.SenderClient.ID);
+                    else if (ViewModel.Client.client != null && ViewModel.Client.client.ID == package.TargetClient.ID)
+                        ViewModel.Client.client = bl.DisplayClient(package.TargetClient.ID);
+
                     updatePackagesList();
                     updateClientsList();
                     break;
@@ -148,8 +162,8 @@ namespace Model
                 case updates.Delivered:
                     if (ViewModel.Package.package != null && ViewModel.Package.package.ID == id)
                         ViewModel.Package.package = bl.DisplayPackage(id);
-                    BO.Package package = bl.DisplayPackage(id);
 
+                    package = bl.DisplayPackage(id);
                     if (ViewModel.Client.client != null && ViewModel.Client.client.ID == package.SenderClient.ID)
                         ViewModel.Client.client = bl.DisplayClient(package.SenderClient.ID);
                     else if (ViewModel.Client.client != null && ViewModel.Client.client.ID == package.TargetClient.ID)
@@ -186,8 +200,15 @@ namespace Model
                 int id = bl.AddPackage(package);
                 BO.PackageToList packageToList = bl.GetPackageToList(id);
                 PO.PackageToList poPackageTo = (PO.PackageToList)packageToList.CopyPropertiesToNew(typeof(PO.PackageToList));
+
+                if (ViewModel.Client.client != null && ViewModel.Client.client.ID == package.SenderClient.ID)
+                    ViewModel.Client.client = bl.DisplayClient(package.SenderClient.ID);
+                else if (ViewModel.Client.client != null && ViewModel.Client.client.ID == package.TargetClient.ID)
+                    ViewModel.Client.client = bl.DisplayClient(package.TargetClient.ID);
+
                 Model.ViewModel.packages.Add(poPackageTo);
             }
+            updateClientsList();
         }
 
 

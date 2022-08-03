@@ -57,7 +57,7 @@ namespace PL
             InitializeComponent();
 
             MainGrid.DataContext = Model.ViewModel.Station;
-            ChargingDroneList.ItemsSource = Model.ViewModel.Station.station.ChargingDronesList;
+            
 
         }
 

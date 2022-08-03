@@ -55,10 +55,11 @@ namespace PL
             bL = BlApi.BlFactory.GetBL();
             Model.ViewModel.Client.client = bL.DisplayClient(id);
             InitializeComponent();
+
             MainGrid.DataContext = Model.ViewModel.Client;
 
-            SenderPackageList.ItemsSource = Model.ViewModel.Client.client.ClientsSender;
-            ReceiverPackageList.ItemsSource = Model.ViewModel.Client.client.ClientsReceiver;
+            //SenderPackageList.ItemsSource = Model.ViewModel.Client.client.ClientsSender;
+            //ReceiverPackageList.ItemsSource = Model.ViewModel.Client.client.ClientsReceiver;
         }
 
         /// <summary>

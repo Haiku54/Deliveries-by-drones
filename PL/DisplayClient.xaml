@@ -136,9 +136,9 @@
 
 
 
-                <ListBox  x:Name="SenderPackageList" Grid.Column="2" Grid.Row="2" Margin="10,1,-70,18" Grid.RowSpan="8" ItemsSource="{Binding}"  Visibility="{Binding ElementName=Mode, Mode=OneWay, Path=IsChecked, Converter={StaticResource  TrueToHidden}}" MouseDoubleClick="SenderList_MouseDoubleClick"/>
+                <ListBox  x:Name="SenderPackageList" Grid.Column="2" Grid.Row="2" Margin="10,1,-70,18" Grid.RowSpan="8"   Visibility="{Binding ElementName=Mode, Mode=OneWay, Path=IsChecked, Converter={StaticResource  TrueToHidden}}" ItemsSource="{Binding Path= client.ClientsSender }"  MouseDoubleClick="SenderList_MouseDoubleClick"/>
 
-                <ListBox x:Name="ReceiverPackageList"  Grid.Column="2"  Grid.Row="12" Margin="10,0,-70,18" Grid.RowSpan="8"  ItemsSource="{Binding}" Visibility="{Binding ElementName=Mode, Mode=OneWay, Path=IsChecked, Converter={StaticResource  TrueToHidden}}" MouseDoubleClick="ReceiverList_MouseDoubleClick"/>
+                <ListBox x:Name="ReceiverPackageList"  Grid.Column="2"  Grid.Row="12" Margin="10,0,-70,18" Grid.RowSpan="8"  ItemsSource="{Binding Path=client.ClientsReceiver}" Visibility="{Binding ElementName=Mode, Mode=OneWay, Path=IsChecked, Converter={StaticResource  TrueToHidden}}" MouseDoubleClick="ReceiverList_MouseDoubleClick"/>
                 <gmaps:GMapControl x:Name="mapView" Grid.Column="2" Grid.Row="8" Margin="47,9,-70,18" Grid.RowSpan="12" Loaded="mapView_Loaded" Zoom="12"  Visibility="{Binding ElementName=Mode, Mode=OneWay, Path=IsChecked, Converter={StaticResource  TrueToVisible}}" 
                                    Position="{Binding client.ClientLocation, Mode=OneWayToSource, Converter={StaticResource  locationToPoint}}"/>
 
