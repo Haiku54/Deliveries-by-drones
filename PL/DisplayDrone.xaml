@@ -3,13 +3,14 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-       xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      xmlns:gmaps="clr-namespace:GMap.NET.WindowsPresentation;assembly=GMap.NET.WindowsPresentation"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
       xmlns:local="clr-namespace:PL"
       xmlns:localModel="clr-namespace:Model" d:DataContext="{d:DesignInstance Type=localModel:Drone}"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="DisplayDrone">
- 
+
     <Page.Resources>
         <local:EnumToInt x:Key="EnumToInt"></local:EnumToInt>
         <local:NullToTrue x:Key="NullToTrue"></local:NullToTrue>
@@ -28,6 +29,7 @@
         <local:TrueifShiping x:Key="TrueifShiping"></local:TrueifShiping>
         <local:BatteryBackground x:Key="BatteryBackground"></local:BatteryBackground>
         <local:DisplaysButtonsInDroneWindow x:Key="DisplaysButtonsInDroneWindow"></local:DisplaysButtonsInDroneWindow>
+        <local:droneLocationToLatLonPoint x:Key="locationToPoint"></local:droneLocationToLatLonPoint>
 
 
         <localModel:Ticker x:Key="Ticker"></localModel:Ticker>
@@ -180,6 +182,8 @@
 
             <Grid x:Name="Buttons" Grid.RowSpan="2" Margin="0,0,0,-10"  Grid.Row="1">
 
+
+
                 <Grid.Visibility>
                     <MultiBinding Converter="{StaticResource DisplaysButtonsInDroneWindow}">
                         <Binding ElementName="Mode"  Mode="OneWay" Path="IsChecked" />
@@ -293,9 +297,11 @@
                     <TreeViewItem Header="{Binding drone.DronePackageProcess.Distance}" FontWeight="Regular"/>
                 </TreeViewItem>
             </TreeView>
-
+            
         </Grid>
 
+        <gmaps:GMapControl x:Name="mapView"  Loaded="mapView_Loaded"   Margin="0,260,625,0" Height="170" Width="150" Visibility="{Binding ElementName=Mode, Mode=OneWay, Path=IsChecked, Converter={StaticResource TrueToHidden}}" Zoom="12" MinZoom="2" MaxZoom="17" CanDragMap="True" 
+                            Position="{Binding drone.DroneLocation, Mode=TwoWay, Converter={StaticResource  locationToPoint}}"/>
 
     </Grid>
 </Page>

@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GMap.NET;
 using Model;
 
 
@@ -399,9 +400,14 @@ namespace PL
 
 
 
+        private void mapView_Loaded(object sender, RoutedEventArgs e)
+        {
 
-
-       
+            GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerAndCache;
+            mapView.MapProvider = GMap.NET.MapProviders.OpenStreetMapProvider.Instance;
+            mapView.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionAndCenter;
+            mapView.Zoom = 12;
+        }
     }
 }
 

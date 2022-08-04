@@ -24,7 +24,7 @@
         <local:TrueToVisible x:Key="TrueToVisible"></local:TrueToVisible>
         <local:TrueToFalse x:Key="TrueToFalse"></local:TrueToFalse>
         <local:LocationToString x:Key="LocationToString"></local:LocationToString>
-        <local:locationToPoint x:Key="locationToPoint"></local:locationToPoint>
+        <local:droneLocationToLatLonPoint x:Key="locationToPoint"></local:droneLocationToLatLonPoint>
 
         <Style x:Key="clients" TargetType="ComboBox">
             <Setter Property="ItemsSource" Value="{Binding}"></Setter>
@@ -140,7 +140,7 @@
 
                 <ListBox x:Name="ReceiverPackageList"  Grid.Column="2"  Grid.Row="12" Margin="10,0,-70,18" Grid.RowSpan="8"  ItemsSource="{Binding Path=client.ClientsReceiver}" Visibility="{Binding ElementName=Mode, Mode=OneWay, Path=IsChecked, Converter={StaticResource  TrueToHidden}}" MouseDoubleClick="ReceiverList_MouseDoubleClick"/>
                 <gmaps:GMapControl x:Name="mapView" Grid.Column="2" Grid.Row="8" Margin="47,9,-70,18" Grid.RowSpan="12" Loaded="mapView_Loaded" Zoom="12"  Visibility="{Binding ElementName=Mode, Mode=OneWay, Path=IsChecked, Converter={StaticResource  TrueToVisible}}" 
-                                   Position="{Binding client.ClientLocation, Mode=OneWayToSource, Converter={StaticResource  locationToPoint}}"/>
+                                   Position="{Binding client.ClientLocation, Mode=TwoWay, Converter={StaticResource  locationToPoint}}"/>
 
                 <TextBlock x:Name="Station_latitude" HorizontalAlignment="Left" Grid.Row="7" Text="Latitude:" TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="Aharoni" FontSize="13" FontWeight="Normal" Visibility="{Binding ElementName=Mode, Mode=OneWay, Path=IsChecked, Converter={StaticResource TrueToVisible}}" />
                 <TextBlock x:Name="Station_longitude" HorizontalAlignment="Left" Grid.Row="9" Text="Longitude:" TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="Aharoni" FontSize="13" FontWeight="Normal" Visibility="{Binding ElementName=Mode, Mode=OneWay, Path=IsChecked, Converter={StaticResource TrueToVisible}}"/>

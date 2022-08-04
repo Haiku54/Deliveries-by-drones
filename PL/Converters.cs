@@ -432,7 +432,7 @@ namespace PL
         }
     }
 
-    public class locationToPoint : IValueConverter
+    public class droneLocationToLatLonPoint : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -453,4 +453,6 @@ namespace PL
             return p;
         }
     }
+
+
 }

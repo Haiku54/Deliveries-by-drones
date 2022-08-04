@@ -13,7 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using GMap.NET;
-using GMap.NET.WindowsForms;
+using GMap.NET.WindowsForms.Markers;
+using GMap.NET.WindowsPresentation;
 using Model;
 
 namespace PL
@@ -58,8 +59,6 @@ namespace PL
 
             MainGrid.DataContext = Model.ViewModel.Client;
 
-            //SenderPackageList.ItemsSource = Model.ViewModel.Client.client.ClientsSender;
-            //ReceiverPackageList.ItemsSource = Model.ViewModel.Client.client.ClientsReceiver;
         }
 
         /// <summary>
