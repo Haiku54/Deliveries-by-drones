@@ -77,7 +77,7 @@ namespace PL
             backgroundWorker = new BackgroundWorker();
 
             backgroundWorker.DoWork += Simulator_DoWork;
-            backgroundWorker.ProgressChanged += Model.ViewModel.updateData;
+            backgroundWorker.ProgressChanged += Model.ViewModel.UpdateDataInSimulator;
             backgroundWorker.WorkerReportsProgress = true;
             backgroundWorker.WorkerSupportsCancellation = true;
             backgroundWorker.RunWorkerCompleted += Simulator_RunWorkerCompleted;
@@ -92,11 +92,11 @@ namespace PL
         {
             try
             {
-                bl.ChargeDrone(Drone.drone.ID);
-                MessageBox.Show("Drone sent to charge", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                Model.ViewModel.ChargeDrone(Drone.drone.ID);
                 Drone.drone = bl.DisplayDrone(Drone.drone.ID);
+                MessageBox.Show("Drone sent to charge", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                var d = Model.ViewModel.drones.First(d => d.ID == Drone.drone.ID);d. Status = BO.DroneStatus.Maintenance; d.Battery = Drone.drone.Battery;
+
             }
             catch (Exception ex)
             {
@@ -123,9 +123,9 @@ namespace PL
             {
                 try
                 {
-                    bl.UpdateDroneName(Drone.drone.ID, DroneModel.Text);
-                    MessageBox.Show("Drone ViewModel have been changed successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    Model.ViewModel.UpdateDroneName(Drone.drone.ID, DroneModel.Text);
                     Drone.drone = bl.DisplayDrone(Drone.drone.ID);
+                    MessageBox.Show("Drone ViewModel have been changed successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch (Exception ex)
                 {
@@ -143,10 +143,9 @@ namespace PL
         {
             try
             {
-                bl.FinishCharging(Drone.drone.ID);
+                Model.ViewModel.FinishCharging(Drone.drone.ID);
                 Drone.drone = bl.DisplayDrone(Drone.drone.ID);
                 MessageBox.Show($"Drone have been unplugged, Battery left: {Drone.drone.Battery}%", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                var d = Model.ViewModel.drones.First(d => d.ID == Drone.drone.ID);d.Status = BO.DroneStatus.Available; d.Battery = Drone.drone.Battery;
 
             }
             catch (Exception ex)
@@ -164,9 +163,11 @@ namespace PL
         {
             try
             {
+                //Model.ViewModel.AssociatePackage(Drone.drone.ID);
                 bl.packageToDrone(Drone.drone.ID);
-                MessageBox.Show("Package have been Associated to drone successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 Drone.drone = bl.DisplayDrone(Drone.drone.ID);
+                MessageBox.Show("Package have been Associated to drone successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+               
 
                 var d = Model.ViewModel.drones.First(d => d.ID == Drone.drone.ID); d.Status = BO.DroneStatus.Shipping; d.PackageID = Drone.drone.DronePackageProcess.Id;
             }
@@ -209,15 +210,9 @@ namespace PL
         {
             try
             {
-                bl.AddDrone(Drone.drone, ((BO.StationToList)Stations_List.SelectedItem).ID);
+                Model.ViewModel.AddDrone(Drone.drone, ((BO.StationToList)Stations_List.SelectedItem).ID);
+
                 MessageBox.Show($"The Drone was successfully added", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-
-                BO.Drone drone = bl.DisplayDrone(Drone.drone.ID);
-                Model.ViewModel.drones.Add(new PO.DroneToList(){ ID = drone.ID, Battery= drone.Battery, DroneLocation = drone.DroneLocation, MaxWeight = drone.MaxWeight, Model = drone.Model, Status = drone.Status });
-
-                Model.ViewModel.stations.First(s => s.ID == ((BO.StationToList)Stations_List.SelectedItem).ID).AvailableChargingSlots--;
-                Model.ViewModel.stations.First(s => s.ID == ((BO.StationToList)Stations_List.SelectedItem).ID).BusyChargingSlots++;
-
                 this.NavigationService.GoBack();
             }
             catch (Exception ex)

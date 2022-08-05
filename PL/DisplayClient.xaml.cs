@@ -93,12 +93,10 @@ namespace PL
         {
             try
             {
-                bL.UpdateClient(Model.ViewModel.Client.client.ID, Client_Name.Text, "");
+                Model.ViewModel.UpdateClientName(Client_Name.Text);
 
                 MessageBox.Show("Client Name have been Changed Successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                Model.ViewModel.Client.client = bL.DisplayClient(Model.ViewModel.Client.client.ID);
-
-                Model.ViewModel.clients.First(c => c.Id == Model.ViewModel.Client.client.ID).Name = Model.ViewModel.Client.client.Name;
+                
             }
             catch (Exception ex)
             {
@@ -116,11 +114,8 @@ namespace PL
         {
             try
             {
-                bL.UpdateClient(Model.ViewModel.Client.client.ID, "", Client_Phone.Text);
+                Model.ViewModel.UpdateClientPhone(Client_Phone.Text);
                 MessageBox.Show("Client Phone have been Changed Successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                Model.ViewModel.Client.client = bL.DisplayClient(Model.ViewModel.Client.client.ID);
-
-                Model.ViewModel.clients.First(c => c.Id == Model.ViewModel.Client.client.ID).Phone = Model.ViewModel.Client.client.Phone;
             }
             catch (Exception ex)
             {
@@ -171,11 +166,10 @@ namespace PL
         {
             try
             {
-                bL.AddClient(Model.ViewModel.Client.client);
+                Model.ViewModel.AddClient();
                 MessageBox.Show($"The Client was successfully added", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 if (MainWindow != null) MainWindow(this, new RoutedEventArgs());
 
-                Model.ViewModel.clients.Add((PO.ClientToList)bL.GetClientToList(Model.ViewModel.Client.client.ID).CopyPropertiesToNew(typeof(PO.ClientToList)));
                 if (this.NavigationService != null && this.NavigationService.CanGoBack) this.NavigationService.GoBack();
             }
             catch (Exception ex)
@@ -214,24 +208,16 @@ namespace PL
         {
 
             GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerAndCache;
-            // choose your provider here
             mapView.MapProvider = GMap.NET.MapProviders.OpenStreetMapProvider.Instance;
             mapView.MinZoom = 2;
             mapView.MaxZoom = 17;
-
-            // whole world zoom
             mapView.Zoom = 12;
-            // lets the map use the mousewheel to zoom
+           
             mapView.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionAndCenter;
-            // lets the user drag the map
             mapView.CanDragMap = true;
-            // lets the user drag the map with the left mouse button
             mapView.DragButton = MouseButton.Left;
             mapView.Position = new PointLatLng(31.761804840069285, 35.189091442003786);
         }
-
- 
-
 
     }
 }

@@ -105,8 +105,15 @@ namespace Model
 
 
 
+        /////////////////Functions for updates during the simulator
 
-        internal static void updateData(object sender, ProgressChangedEventArgs e)
+
+        /// <summary>
+        /// Updating data in the simulator
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        internal static void UpdateDataInSimulator(object sender, ProgressChangedEventArgs e)
         {
             int id = 0;
             updates update = (updates)e.ProgressPercentage;
@@ -212,8 +219,84 @@ namespace Model
         }
 
 
+
+
+
+
+
+
+        ///////////Functions for manual updates
+        ///for client
+      
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="name"></param>
+        internal static void UpdateClientName(string name)
+        {
+            bl.UpdateClient(Model.ViewModel.Client.client.ID, name, "");
+            Model.ViewModel.Client.client = bl.DisplayClient(Model.ViewModel.Client.client.ID);
+            updateClientsList();
+        }
+
+        internal static void UpdateClientPhone(string phone)
+        {
+            bl.UpdateClient(Model.ViewModel.Client.client.ID, "", phone);
+            Model.ViewModel.Client.client = bl.DisplayClient(Model.ViewModel.Client.client.ID);
+            updateClientsList();
+        }
+
+        internal static void AddClient()
+        {
+            bl.AddClient(Model.ViewModel.Client.client);
+            updateClientsList();
+        }
+
+
+
+        ///for drone
+
+        internal static void ChargeDrone(int id)
+        {
+            bl.ChargeDrone(id);
+            updateDronesList();
+        }
+
+        internal static void UpdateDroneName(int id, string name)
+        {
+            bl.UpdateDroneName(id, name);
+            updateDronesList();
+        }
+
+        internal static void FinishCharging(int id)
+        {
+            bl.FinishCharging(id);
+            updateDronesList();
+        }
+
+        internal static void AssociatePackage(int id)
+        {
+            bl.packageToDrone(id);
+            updateDronesList();
+        }
+
+        internal static void AddDrone(BO.Drone drone , int stationID)
+        {
+            bl.AddDrone(drone, stationID);
+            updateDronesList();
+            updateStationsList();
+        }
+
+
+        ///
     }
 
 
- 
+
+
+
+
+
+
+
 }

@@ -126,7 +126,7 @@
 
 
 
-                <TextBox x:Name="Location" Grid.Column="1" Grid.Row="6" TextWrapping="Wrap"  SelectionBrush="#FFD76200" ToolTip="" FontFamily="Arial" FontWeight="Bold" Background="#FFF0F0F0" IsReadOnly="True" Text="{Binding client.ClientLocation, Mode=OneWay}"  Visibility="{Binding ElementName=Mode, Mode=OneWay, Path=IsChecked, Converter={StaticResource TrueToHidden}}" VerticalContentAlignment="Center" Margin="0,16,0,4" Grid.RowSpan="3" >
+                <TextBox x:Name="Location" Grid.Column="1" Grid.Row="6" TextWrapping="Wrap"  SelectionBrush="#FFD76200" ToolTip="" FontFamily="Arial" FontWeight="Bold" Background="#FFF0F0F0" IsReadOnly="True" Text="{Binding client.ClientLocation, Mode=OneTime}"  Visibility="{Binding ElementName=Mode, Mode=OneWay, Path=IsChecked, Converter={StaticResource TrueToHidden}}" VerticalContentAlignment="Center" Margin="0,16,0,4" Grid.RowSpan="3" >
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="5" />
@@ -140,7 +140,7 @@
 
                 <ListBox x:Name="ReceiverPackageList"  Grid.Column="2"  Grid.Row="12" Margin="10,0,-70,18" Grid.RowSpan="8"  ItemsSource="{Binding Path=client.ClientsReceiver}" Visibility="{Binding ElementName=Mode, Mode=OneWay, Path=IsChecked, Converter={StaticResource  TrueToHidden}}" MouseDoubleClick="ReceiverList_MouseDoubleClick"/>
                 <gmaps:GMapControl x:Name="mapView" Grid.Column="2" Grid.Row="8" Margin="47,9,-70,18" Grid.RowSpan="12" Loaded="mapView_Loaded" Zoom="12"  Visibility="{Binding ElementName=Mode, Mode=OneWay, Path=IsChecked, Converter={StaticResource  TrueToVisible}}" 
-                                   Position="{Binding client.ClientLocation, Mode=TwoWay, Converter={StaticResource  locationToPoint}}"/>
+                                   Position="{Binding client.ClientLocation, Mode=OneWayToSource, Converter={StaticResource  locationToPoint}}"/>
 
                 <TextBlock x:Name="Station_latitude" HorizontalAlignment="Left" Grid.Row="7" Text="Latitude:" TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="Aharoni" FontSize="13" FontWeight="Normal" Visibility="{Binding ElementName=Mode, Mode=OneWay, Path=IsChecked, Converter={StaticResource TrueToVisible}}" />
                 <TextBlock x:Name="Station_longitude" HorizontalAlignment="Left" Grid.Row="9" Text="Longitude:" TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="Aharoni" FontSize="13" FontWeight="Normal" Visibility="{Binding ElementName=Mode, Mode=OneWay, Path=IsChecked, Converter={StaticResource TrueToVisible}}"/>
