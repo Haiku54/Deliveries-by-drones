@@ -70,10 +70,8 @@ namespace PL
         {
             try
             {
-                bL.UpdateStationName(Model.ViewModel.Station.station.ID, NameInput.Text);
+                Model.ViewModel.UpdateStationName(NameInput.Text);
                 MessageBox.Show($"Name have been changed to {NameInput.Text} !", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                Model.ViewModel.Station.station = bL.DisplayStation(Model.ViewModel.Station.station.ID); 
-                Model.ViewModel.stations.First(s => s.ID == Model.ViewModel.Station.station.ID).Name = NameInput.Text;
             }
             catch (Exception ex)
             {
@@ -90,11 +88,9 @@ namespace PL
         {
             try
             {
-                int result = Int32.Parse(Charge_slot_input.Text);
-                bL.UpdateStationNumCharge(Model.ViewModel.Station.station.ID, result);
+                int num = Int32.Parse(Charge_slot_input.Text);
+                Model.ViewModel.UpdateStationNumCharge(num);
                 MessageBox.Show($" Number of Charge slot have been updated !", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                Model.ViewModel.Station.station = bL.DisplayStation(Model.ViewModel.Station.station.ID);  //update the list
-                Model.ViewModel.stations.First(s => s.ID == Model.ViewModel.Station.station.ID).AvailableChargingSlots = result - Model.ViewModel.stations.First(s => s.ID == Model.ViewModel.Station.station.ID).BusyChargingSlots;
             }
             catch (Exception ex)
             {
@@ -112,11 +108,9 @@ namespace PL
         {
             try
             {
-                bL.AddStation(Model.ViewModel.Station.station);
+                Model.ViewModel.AddStation();
                 MessageBox.Show($"The station was successfully added", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.NavigationService.GoBack();
-
-                Model.ViewModel.stations.Add(new PO.StationToList() { ID = Model.ViewModel.Station.station.ID, Name = Model.ViewModel.Station.station.Name, AvailableChargingSlots = Model.ViewModel.Station.station.AvailableChargeSlots, BusyChargingSlots = 0 });
             }
             catch (Exception ex)
             {

@@ -163,8 +163,7 @@ namespace PL
         {
             try
             {
-                //Model.ViewModel.AssociatePackage(Drone.drone.ID);
-                bl.packageToDrone(Drone.drone.ID);
+                Model.ViewModel.AssociatePackage(Drone.drone.ID);
                 Drone.drone = bl.DisplayDrone(Drone.drone.ID);
                 MessageBox.Show("Package have been Associated to drone successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                

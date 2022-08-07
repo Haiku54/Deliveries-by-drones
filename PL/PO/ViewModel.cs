@@ -266,18 +266,21 @@ namespace Model
         {
             bl.UpdateDroneName(id, name);
             updateDronesList();
+            updateStationsList();
         }
 
         internal static void FinishCharging(int id)
         {
             bl.FinishCharging(id);
             updateDronesList();
+            updateStationsList();
         }
 
         internal static void AssociatePackage(int id)
         {
             bl.packageToDrone(id);
             updateDronesList();
+            updatePackagesList();
         }
 
         internal static void AddDrone(BO.Drone drone , int stationID)
@@ -288,7 +291,59 @@ namespace Model
         }
 
 
+        ///for packages
         ///
+        internal static void DeletePackage()
+        {
+            bl.DeletePackage(ViewModel.Package.package.ID);
+            updatePackagesList();
+        }
+
+        internal static void AddPackage()
+        {
+            bl.AddPackage(Model.ViewModel.Package.package);
+            updatePackagesList();
+        }
+
+        internal static void PickedUpByDrone()
+        {
+            bl.PickedUpByDrone(Model.ViewModel.Package.package.DroneOfPackage.Id);
+            ViewModel.Package.package = bl.DisplayPackage(Model.ViewModel.Package.package.ID);
+            updatePackagesList();
+            updateDronesList();
+        }
+
+        internal static void DeliveredToClient()
+        {
+            bl.DeliveredToClient(Model.ViewModel.Package.package.DroneOfPackage.Id);
+            ViewModel.Package.package = bl.DisplayPackage(Model.ViewModel.Package.package.ID);
+            updatePackagesList();
+            updateDronesList();
+
+        }
+
+        internal static void UpdateStationName(string name)
+        {
+            bl.UpdateStationName(Model.ViewModel.Station.station.ID, name);
+            ViewModel.Station.station = bl.DisplayStation(ViewModel.Station.station.ID);
+            updateStationsList();
+
+        }
+
+        internal static void UpdateStationNumCharge(int num)
+        {
+            bl.UpdateStationNumCharge(Model.ViewModel.Station.station.ID, num);
+            ViewModel.Station.station = bl.DisplayStation(ViewModel.Station.station.ID);
+            updateStationsList();
+
+        }
+
+        internal static void AddStation()
+        {
+            bl.AddStation(Model.ViewModel.Station.station);
+            updateStationsList();
+
+        }
     }
 
 

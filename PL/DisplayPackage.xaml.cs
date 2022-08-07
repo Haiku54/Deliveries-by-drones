@@ -70,10 +70,8 @@ namespace PL
         {
             try
             {
-                bL.DeletePackage(Model.ViewModel.Package.package.ID);
-                //if (Back != null) Back(-1);
+                Model.ViewModel.DeletePackage();
                 MessageBox.Show($"The package has been deleted !", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                Model.ViewModel.packages.Remove(Model.ViewModel.packages.First(p => p.Id == Model.ViewModel.Package.package.ID));
                 this.NavigationService.GoBack();
             }
             catch (Exception ex)
@@ -91,11 +89,8 @@ namespace PL
         {
             try
             {
-                int i = bL.AddPackage(Model.ViewModel.Package.package);
-                //if (Back != null) Back(-1);
+                Model.ViewModel.AddPackage();
                 MessageBox.Show($"The package was successfully added", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                BO.PackageToList packageToList = bL.GetPackageToList(i);
-                Model.ViewModel.packages.Add((PO.PackageToList)packageToList.CopyPropertiesToNew(typeof(PO.PackageToList)));
                 this.NavigationService.GoBack();
             }
             catch (Exception ex)
@@ -124,11 +119,8 @@ namespace PL
         {
             try
             {
-                bL.PickedUpByDrone(Model.ViewModel.Package.package.DroneOfPackage.Id);
+                Model.ViewModel.PickedUpByDrone();
                 MessageBox.Show($"The package has been collected !", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                Model.ViewModel.Package.package = bL.DisplayPackage(Model.ViewModel.Package.package.ID);
-
-                Model.ViewModel.packages.First(p => p.Id == Model.ViewModel.Package.package.ID).Status = BO.PackageStatus.PickedUp;
             }
             catch (Exception ex)
             {
@@ -146,11 +138,9 @@ namespace PL
         {
             try
             {
-                bL.DeliveredToClient(Model.ViewModel.Package.package.DroneOfPackage.Id);
-                MessageBox.Show($"The package was delivered to the Client !", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                Model.ViewModel.Package.package = bL.DisplayPackage(Model.ViewModel.Package.package.ID);
 
-                Model.ViewModel.packages.First(p => p.Id == Model.ViewModel.Package.package.ID).Status = BO.PackageStatus.Delivered;
+                Model.ViewModel.DeliveredToClient();
+                MessageBox.Show($"The package was delivered to the Client !", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {

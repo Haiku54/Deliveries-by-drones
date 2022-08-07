@@ -287,7 +287,8 @@ namespace BL
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeletePackage(int ID)
         {
-            if(!DisplayPackageList().Any(p=> p.Id == ID)) throw new Exceptions.CantDelete(ID, "ID To Delete Not Found");
+            if (ID == 1000 || ID == 1001 || ID == 1002) throw new Exceptions.CantDelete(ID, ".    We are sorry but the first packages cannot be deleted. Please try others or add new ones and then delete"); // It is impossible to delete because of the locations of the drones at initialization in BL
+            if (!DisplayPackageList().Any(p=> p.Id == ID)) throw new Exceptions.CantDelete(ID, "ID To Delete Not Found");
             if (DisplayPackage(ID).Associated != null) throw new Exceptions.CantDelete(ID, "The Package Associated");
             try
             {
