@@ -28,7 +28,7 @@ namespace Model
         public static Package Package { get; set; }
         public static Client Client { get; set; }
 
-
+        
         public ViewModel()
         {
             bl = BlApi.BlFactory.GetBL();
@@ -226,6 +226,9 @@ namespace Model
 
 
         ///////////Functions for manual updates
+        
+
+
         ///for client
       
         /// <summary>

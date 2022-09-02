@@ -26,6 +26,7 @@ namespace PLClient
         {
             InitializeComponent();
             clientPage = new ClientMde();
+            new Model.ViewModel();
         }
 
         private void Login_Click(object sender, RoutedEventArgs e)
