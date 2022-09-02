@@ -13,12 +13,12 @@ enum updates
 
 namespace Model
 {
-    public class ViewModel  //class used to use observable collection type for the list of object
+    public class ViewModel  //The class is responsible for updating all the data in the display
     {
         static BlApi.IBL bl;
         static private Random random = new Random();
 
-        public static ObservableCollection<PO.StationToList> stations = new ObservableCollection<PO.StationToList>();
+        public static ObservableCollection<PO.StationToList> stations = new ObservableCollection<PO.StationToList>(); // The update is carried out using observable collection
         public static ObservableCollection<PO.DroneToList> drones = new ObservableCollection<PO.DroneToList>();
         public static ObservableCollection<PO.ClientToList> clients = new ObservableCollection<PO.ClientToList>();
         public static ObservableCollection<PO.PackageToList> packages = new ObservableCollection<PO.PackageToList>();
